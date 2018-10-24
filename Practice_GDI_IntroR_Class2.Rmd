@@ -1,0 +1,99 @@
+---
+title: "Intro to R Class 2 Practice"
+author: "Maura Oray - GDI Boston"
+date: "10/23/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+#Load libraries here
+
+library(ggplot2)
+library(data.table)
+
+```
+
+
+```{r}
+
+#Set your working directory
+
+```
+
+
+```{r}
+
+#Load the dataset and name the data frame
+
+```
+
+```{r}
+
+#Explore the data set (hint: check descriptive statistics and data types)
+
+
+```
+
+```{r}
+
+#Remove first column of the data set
+
+```
+
+
+```{r}
+
+#Rename columns 1,2,3,4: Sepal_Length, Sepal_Width, Petal_Length, Petal_Width
+
+```
+
+```{r}
+
+#Change Species to character and then view 
+
+#Change Species back to factor and view
+  
+```
+
+
+```{r}
+
+#Create a simple histogram of Sepal Width (and change title and labels)
+
+```
+
+```{r}
+
+#Create a ggplot histogram of Sepal Width (and change title and labels)
+
+```
+
+
+```{r}
+
+#Create ggplot boxplot of Species and Petal Length
+
+
+```
+
+
+```{r}
+
+#Create a density plot of Sepal Length and fill with Species
+
+```
+
+```{r}
+
+#Create a scatterplot of Petal Length v. Petal Width
+#CHALLENGE: Add a regession line (hint use geom_smooth())
+
+
+```
+
+```{r}
+
+#Scatterplot of Sepal Length v. Sepal Width
+
+
+```
