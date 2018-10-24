@@ -97,3 +97,29 @@ library(data.table)
 
 
 ```
+
+```{r}
+
+#Simple Regression: Sepal Length (y) as a function of Sepal Width (x)
+#Y must be continuous
+#X must be continuous or discrete
+
+#Check correlation
+
+
+```
+
+```{r}
+
+#Create linear model using lm
+
+
+```
+
+
+```{r}
+
+#Plot linear model
+
+
+```
