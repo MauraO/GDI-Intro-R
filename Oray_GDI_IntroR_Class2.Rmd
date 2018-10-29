@@ -18,8 +18,6 @@ library(data.table)
 
 #Set your working directory
 
-setwd("~/Desktop/GDI")
-
 ```
 
 
@@ -27,25 +25,18 @@ setwd("~/Desktop/GDI")
 
 #Load the dataset and name the data frame
 
-iris <- read.csv("Iris.csv")
-
-
 ```
 
 ```{r}
 
 #Explore the data set (hint: check descriptive statistics and data types)
 
-summary(iris)
-str(iris)
 
 ```
 
 ```{r}
 
 #Remove first column of the data set
-
-iris <- iris[-c(1)]
 
 ```
 
@@ -54,39 +45,23 @@ iris <- iris[-c(1)]
 
 #Rename columns 1,2,3,4: Sepal_Length, Sepal_Width, Petal_Length, Petal_Width
 
-names(iris) <- c("Sepal_Length", "Sepal_Width", "Petal_Length", "Petal_Width", "Species")
-
-#Another way
-
-"Sepal_Length" <- colnames(iris)[colnames(iris)=="SepalLengthCm"]
-
-#Yet Another Way
-
-setnames(iris, old=c("SepalLengthCm", "SepalWidthCm"), new=c("Sepal_Length", "Sepal_Width"))
-
 ```
 
 ```{r}
 
 #Change Species to character and then view 
 
-iris$Species <- as.character(iris$Species)
-
-summary(iris$Species)
-
 #Change Species back to factor and view
-
-iris$Species <- as.factor(iris$Species)
-
-summary(iris$Species)
   
-```  
+```
+
+
 ```{r}
 
 #Create a simple histogram of Sepal Width (and change title and labels)
 
-hist(iris$Sepal_Width,
-     xlab = "Sepal Width", 
+hist(iris$SepalWidthCm,
+     xlab = "Sepal Width",
      main = "Sepal Width Distribution")
 
 ```
@@ -95,36 +70,39 @@ hist(iris$Sepal_Width,
 
 #Create a ggplot histogram of Sepal Width (and change title and labels)
 
-ggplot(data=iris, aes(x=Sepal_Width)) +
-  geom_histogram(binwidth = 0.2, aes(fill=Species)) +
-  xlab("Sepal Width") + 
+ggplot(iris, aes(x = SepalWidthCm, fill=Species)) +
+  geom_histogram() +
+  stat_bin(bins = 10) +
+  xlab("Sepal Width") +
   ylab("Frequency") +
   ggtitle("Sepal Width Distribution")
 
 ```
 
+
 ```{r}
 
 #Create ggplot boxplot of Species and Petal Length
 
-ggplot(data=iris, aes(x=Species, y=Petal_Length, fill=Species)) +
+ggplot(iris, aes(x = Species, y = PetalLengthCm, fill = Species)) +
   geom_boxplot() +
-  xlab("Species") + 
-  ylab("Petal Length") +
-  ggtitle("Boxplot of Petal Length and Species") +
-  theme(legend.position = "none")
+  xlab("Species") +
+  ylab("Petal Length (cm)") +
+  ggtitle("Petal Length for Species")
+
 
 ```
+
+
 ```{r}
 
 #Create a density plot of Sepal Length and fill with Species
 
-ggplot(data=iris, aes(x=Sepal_Length, fill=Species)) +
-  geom_density(alpha=0.3) +
-  xlab("Sepal Length (cm)") + 
-  ylab("Density") +
-  ggtitle("Density Plot of Sepal Length") +
-  theme(legend.position = "none")
+ggplot(iris, aes(x = SepalLengthCm, fill=Species)) +
+  geom_density() +
+  xlab("Sepal Length") +
+  ylab("Frequency") +
+  ggtitle("Sepal Length Density")
 
 ```
 
@@ -133,12 +111,13 @@ ggplot(data=iris, aes(x=Sepal_Length, fill=Species)) +
 #Create a scatterplot of Petal Length v. Petal Width
 #CHALLENGE: Add a regession line (hint use geom_smooth())
 
-ggplot(data=iris, aes(x=Petal_Length, y = Petal_Width)) +
-  geom_point(aes(color=Species, shape=Species)) +
-  geom_smooth(method="lm") +
-  xlab("Petal Length (cm)") + 
+ggplot(iris, aes(x = PetalLengthCm, y = PetalWidthCm, color=Species)) +
+  geom_point() +
+  geom_smooth() +
+  xlab("Petal Length (cm)") +
   ylab("Petal Width (cm)") +
   ggtitle("Petal Length v. Petal Width")
+
 
 ```
 
@@ -146,10 +125,35 @@ ggplot(data=iris, aes(x=Petal_Length, y = Petal_Width)) +
 
 #Scatterplot of Sepal Length v. Sepal Width
 
-ggplot(data=iris, aes(x=Sepal_Length, y=Sepal_Width)) +
-  geom_point(aes(color=Species, shape=Species)) +
-  xlab("Sepal Length (cm)") + 
-  ylab("Sepal Width (cm)") +
-  ggtitle("Sepal Length v. Sepal Width") 
+
+```
+
+
+```{r}
+
+#Simple Regression: Sepal Length (y) as a function of Sepal Width (x)
+#Y must be continuous
+#X must be continuous or discrete
+
+#Check correlation
+
+cor(iris$SepalLengthCm, iris$SepalWidthCm) 
+
+```
+
+```{r}
+
+#Create linear model using lm
+
+reg <- lm(SepalLengthCm ~ SepalWidthCm, data = iris)
+
+```
+
+
+```{r}
+
+#Plot linear model
+
+plot(reg)
 
 ```
